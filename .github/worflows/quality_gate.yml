@@ -25,4 +25,4 @@ jobs:
       - name: Executar Quality Gate Inteligente
         env:
           IA_API_KEY: ${{ secrets.IA_API_KEY }}
-        run: python agents/analyze_quality.py
+        run: python agents/analyze_quality.py 
