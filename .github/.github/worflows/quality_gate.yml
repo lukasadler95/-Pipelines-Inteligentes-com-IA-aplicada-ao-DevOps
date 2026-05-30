@@ -1,0 +1,28 @@
+name: 1. Quality Gate com IA
+
+on: [push, pull_request]
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Instalar Dependências
+        run: |
+          pip install pytest pytest-cov requests
+
+      - name: Executar Testes e Gerar Cobertura
+        run: |
+          pytest --cov=src --cov-report=json
+
+      - name: Executar Quality Gate Inteligente
+        env:
+          IA_API_KEY: ${{ secrets.IA_API_KEY }}
+        run: python agents/analyze_quality.py

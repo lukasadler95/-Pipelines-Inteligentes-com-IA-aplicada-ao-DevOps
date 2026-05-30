@@ -1,0 +1,27 @@
+name: 2. Observabilidade Inteligente
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Executa de hora em hora (ou dispare manualmente)
+  workflow_dispatch:
+
+jobs:
+  observability:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Instalar Dependências
+        run: pip install requests
+
+      - name: Rodar Análise de Observabilidade com IA
+        env:
+          IA_API_KEY: ${{ secrets.IA_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Necessário para a CLI 'gh' criar issues
+        run: python agents/analyze_observability.py

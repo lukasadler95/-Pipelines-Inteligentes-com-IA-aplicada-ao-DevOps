@@ -1,0 +1,10 @@
+{
+  "trace_id": "4a3b2c1d",
+  "flow": "Frontend -> API Gateway -> Payment Service -> Database",
+  "steps": [
+    {"service": "Frontend", "duration_ms": 50},
+    {"service": "API Gateway", "duration_ms": 120},
+    {"service": "Payment Service", "duration_ms": 2800},
+    {"service": "Database", "duration_ms": 30}
+  ]
+}

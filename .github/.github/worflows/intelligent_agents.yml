@@ -1,0 +1,23 @@
+name: 3. Agente de Segurança Autônomo
+
+on: [push]
+
+jobs:
+  security-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Instalar Dependências
+        run: pip install requests
+
+      - name: Varredura do Agente de Segurança
+        env:
+          IA_API_KEY: ${{ secrets.IA_API_KEY }}
+        run: python agents/security_agent.py
